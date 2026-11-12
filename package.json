@@ -1,0 +1,26 @@
+{
+  "name": "aqua-drone",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "device:key": "node --env-file=.env scripts/create-device-key.ts",
+    "device:sim": "node --env-file=.env scripts/simulate-device.ts",
+    "test:db": "node tests/db/run.test.mjs",
+    "test:device": "node tests/device/e2e.test.mjs",
+    "test": "npm run test:db && npm run test:device && npm run test:app",
+    "test:app": "vitest run"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
+    "jsdom": "^29.1.1",
+    "vite": "^8.3.8",
+    "vitest": "^4.1.12"
+  }
+}

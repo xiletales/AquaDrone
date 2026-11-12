@@ -1,0 +1,33 @@
+/* Token diekstrak dari design/*.svg dan spesifikasi. */
+:root{
+  --ink:#0F2A2E; --mu:#4C666A; --pri:#0E7C86;
+  --pn:rgba(255,255,255,.93); --ln:rgba(15,42,46,.12); --fld:rgba(15,42,46,.07);
+  --tip:#0b4f58;
+  --ok1:#0d6672; --ok2:#1d7f77; --wr1:#86520a; --wr2:#9a6422; --cr1:#8f2a28; --cr2:#a8433b;
+  --h0b:#E3F5EA; --h0t:#0f4d34; --h1b:#FFF0C9; --h1t:#5c3b00; --h2b:#B3261E; --h2t:#ffffff;
+  --c0b:#DDF3E6; --c0t:#14633f; --c1b:#FFF0CC; --c1t:#6b4300; --c2b:#FBE0E0; --c2t:#A32D2D;
+  --g-red:#E5736C; --g-yel:#F2C14E; --g-grn:#5CC391;
+  --lane-done:#0E7C86; --lane-run:#5BB7BF; --lane-todo:#DCE8E9; --lane-leg:#b9cacc;
+  --btn:#0E7C86; --pl-bg:rgba(255,255,255,.65); --pl-bg-red:rgba(255,255,255,.14);
+  --dot:#FF8A80; --lock-bg:#0F2A2E; --drone-ib:#E7EEEE; --chip-porsi-t:#7a5200; --danger:#B3261E;
+  --f-txt:'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;
+  --f-num:'Outfit','Segoe UI',system-ui,sans-serif;
+  color-scheme:light dark;
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --pn:rgba(9,27,33,.9); --ink:#E8F3F3; --mu:#A5BFC2; --ln:rgba(255,255,255,.14); --pri:#14919c; --fld:rgba(255,255,255,.09);
+    --c0b:#12402d; --c0t:#9be8c0; --c1b:#4a3606; --c1t:#ffd98a; --c2b:#4d1c1a; --c2t:#ffb4ac;
+    --h0b:#103a2b; --h0t:#c7f3dc; --h1b:#4a3606; --h1t:#ffe2a3; --h2b:#a3211a;
+    --ok1:#08333c; --ok2:#0d4a50; --wr1:#4a2f06; --wr2:#5e3d10; --cr1:#4a1413; --cr2:#62241f;
+    --lane-todo:#2a4a50; --drone-ib:rgba(255,255,255,.09); --chip-porsi-t:#ffd98a; --pl-bg:rgba(255,255,255,.14);
+  }
+}
+:root[data-theme="dark"]{
+  --pn:rgba(9,27,33,.9); --ink:#E8F3F3; --mu:#A5BFC2; --ln:rgba(255,255,255,.14); --pri:#14919c; --fld:rgba(255,255,255,.09);
+  --c0b:#12402d; --c0t:#9be8c0; --c1b:#4a3606; --c1t:#ffd98a; --c2b:#4d1c1a; --c2t:#ffb4ac;
+  --h0b:#103a2b; --h0t:#c7f3dc; --h1b:#4a3606; --h1t:#ffe2a3; --h2b:#a3211a;
+  --ok1:#08333c; --ok2:#0d4a50; --wr1:#4a2f06; --wr2:#5e3d10; --cr1:#4a1413; --cr2:#62241f;
+  --lane-todo:#2a4a50; --drone-ib:rgba(255,255,255,.09); --chip-porsi-t:#ffd98a; --pl-bg:rgba(255,255,255,.14);
+}

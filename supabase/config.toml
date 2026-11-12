@@ -1,0 +1,15 @@
+# Konfigurasi minimal. `supabase link` / `supabase init --force` akan melengkapi sisanya.
+project_id = "AquaDrone"
+
+# Perangkat tidak punya JWT pengguna (dan kunci publishable bukan JWT): autentikasi memakai x-device-key.
+[functions.device-heartbeat]
+verify_jwt = false
+[functions.device-poll]
+verify_jwt = false
+[functions.device-telemetry]
+verify_jwt = false
+[functions.device-feed-progress]
+verify_jwt = false
+# Watchdog memeriksa sendiri header Authorization = service_role.
+[functions.session-watchdog]
+verify_jwt = false

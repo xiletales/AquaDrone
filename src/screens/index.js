@@ -1,0 +1,10 @@
+import './home.js';
+import './measure.js';
+import './wait.js';
+import './lost.js';
+import './result.js';
+import './feed.js';
+import './history.js';
+import './settings.js';
+import './lock.js';
+import './login.js';

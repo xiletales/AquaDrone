@@ -1,0 +1,23 @@
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+body[data-day="1"] .moon,body[data-day="1"] .stars{display:none}
+body[data-day="0"] .sun{display:none}
+.cl{fill:#fff;opacity:.2;animation:dr 70s linear infinite alternate;transition:opacity .6s,fill .6s}
+.cl.c2{animation-duration:95s;animation-direction:alternate-reverse}
+body[data-st="1"] .cl{opacity:.1}
+body[data-st="2"] .cl{fill:#2a0b0b;opacity:.32}
+@keyframes dr{to{transform:translateX(180px)}}
+.dn{animation:fly 40s linear infinite}
+@keyframes fly{from{transform:translate(-200px,330px)}to{transform:translate(1640px,270px)}}
+.rt{animation:fl .1s linear infinite alternate}
+@keyframes fl{to{opacity:.35}}
+.wv{animation:wv linear infinite}
+@keyframes wv{to{transform:translateX(-360px)}}
+.sw{animation:sw 16s ease-in-out infinite alternate}
+@keyframes sw{to{transform:translateX(110px)}}
+.bu{animation:up linear infinite;fill:none;stroke:#fff}
+@keyframes up{0%{transform:translateY(0);opacity:0}15%{opacity:.5}100%{transform:translateY(-340px);opacity:0}}
+@media(prefers-reduced-motion:reduce){#bg *{animation:none!important}}
+
+/* Selama loader tampil, latar tertutup penuh: jangan render/animasikan (hemat CPU saat start). */
+body.ld #bg{visibility:hidden}
+#bg{contain:strict}
