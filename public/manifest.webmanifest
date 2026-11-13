@@ -1,0 +1,20 @@
+{
+  "name": "AQUA-DRONE",
+  "short_name": "AQUA-DRONE",
+  "description": "Pemantauan kualitas air dan kendali drone untuk tambak udang vaname.",
+  "lang": "id",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0d6672",
+  "background_color": "#0d6672",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

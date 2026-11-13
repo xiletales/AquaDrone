@@ -74,6 +74,14 @@ Dua tab baru ("Air" dan "Pakan") membaca/menulis tabel `monitoring_air` dan `kon
 * Mengetes tanpa perangkat: tambah baris di Table Editor `monitoring_air` (`suhu`, `ph`, `do_mgl`; `suhu` boleh kosong). Contoh: pH 8,0 / suhu 30 / DO 5 = AMAN; pH 7,2 = AWAS; suhu kosong atau DO 2 = BAHAYA.
   **Hati-hati:** menekan tombol di aplikasi menulis ke tabel nyata dan dapat menggerakkan perangkat sungguhan.
 
+## PWA (bisa di-install di HP)
+
+`public/manifest.webmanifest` + ikon (`icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png`, dibuat dari `public/logo.png`) + `public/sw.js`.
+Service worker **hanya meng-cache aset statis** (JS/CSS/gambar/font berhash dan shell `index.html`); permintaan ke Supabase (REST, Auth, Realtime, Functions)
+dan semua request tulis tidak pernah disentuh, jadi data selalu terbaru. Didaftarkan hanya pada build produksi (`npm run build` + `npm run preview`), tidak di `npm run dev`.
+Menaikkan `CACHE_VERSION` di `public/sw.js` membuang cache lama. Agar bisa di-install, aplikasi harus dilayani lewat **HTTPS** (atau `localhost`):
+Android/Chrome: menu ⋮ → "Instal aplikasi"; iPhone/Safari: Bagikan → "Tambah ke Layar Utama".
+
 ## Tes
 
 ```bash

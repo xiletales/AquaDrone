@@ -54,3 +54,16 @@ $('ld').addEventListener('click', () => { skipped = true; finish(); });
 })();
 
 if (import.meta.env.DEV) window.__aqua = { G, go };
+
+// PWA: daftarkan service worker (hanya build produksi; sw.js hanya meng-cache aset statis)
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js')
+      .then(() => navigator.serviceWorker.ready)
+      .then((reg) => {
+        // beri tahu SW aset statis yang sudah dimuat agar tersedia offline sejak kunjungan pertama
+        const urls = performance.getEntriesByType('resource').map((r) => r.name).filter((u) => u.startsWith(location.origin));
+        reg.active?.postMessage({ type: 'CACHE_URLS', urls });
+      })
+      .catch((e) => console.warn('Service worker gagal didaftarkan:', e?.message));
+  });
+}
