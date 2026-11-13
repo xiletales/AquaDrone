@@ -85,6 +85,7 @@ register('pakan', {
 <button class="bo" data-act="pakan-cmd" data-p="0">Tutup</button>
 <p class="nt air-note">Keputusan akhir ada di perangkat ESP32 (berdasarkan sensor terkini). Pesan di atas adalah jawaban dari perangkat.</p>`,
   mount: () => {
+    notice = ''; pending = null;
     const stopAir = watchAir((s) => { air = s; if (document.getElementById('pk-body')) paint(); });
     const stopCtl = watchControl((s) => {
       ctl = s;

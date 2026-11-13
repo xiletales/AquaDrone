@@ -19,16 +19,19 @@ const conv = (res) => res.rows.map((r) => {
 const lit = (v) => (v === null || v === undefined ? 'null' : typeof v === 'number' || typeof v === 'boolean' ? String(v) : `'${String(v).replace(/'/g, "''")}'`);
 const ident = (s) => '"' + s.replace(/"/g, '') + '"';
 
-export async function installRealtime(db) {
+export async function installRealtime(db, tables = ['measurement_sessions', 'measurement_samples', 'measurement_results', 'feeding_runs', 'notifications', 'devices']) {
   await db.exec(`create function rt_notify() returns trigger language plpgsql as $$
     begin perform pg_notify('rt', json_build_object('table', TG_TABLE_NAME, 'type', TG_OP, 'new', to_jsonb(NEW), 'old', to_jsonb(OLD))::text); return null; end $$;`);
-  for (const t of ['measurement_sessions', 'measurement_samples', 'measurement_results', 'feeding_runs', 'notifications', 'devices'])
+  await db.exec(`create or replace function rt_notify() returns trigger language plpgsql as $$
+    begin perform pg_notify('rt', json_build_object('table', TG_TABLE_NAME, 'type', TG_OP, 'new', to_jsonb(NEW), 'old', to_jsonb(OLD))::text); return null; end $$;`).catch(() => {});
+  for (const t of tables)
     await db.exec(`create trigger rt_${t} after insert or update on ${t} for each row execute function rt_notify()`);
 }
 
-export function createFakeClient(db, { onError } = {}) {
+export function createFakeClient(db, { onError, anon = false } = {}) {
   let session = null; const authCbs = []; const channels = new Set(); let unlisten = null;
   const run = (sql) => {
+    if (anon) return db.transaction(async (tx) => { await tx.exec('set local role anon'); return tx.query(sql); }).then((r) => ({ data: conv(r), error: null }), (e) => ({ data: null, error: { message: e.message } }));
     const uid = session?.user.id;
     if (!uid) return Promise.resolve({ data: null, error: { message: 'JWT required' } });
     return asUser(db, uid, async (tx) => tx.query(sql)).then((r) => ({ data: conv(r), error: null }), (e) => ({ data: null, error: { message: e.message } }));

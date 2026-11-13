@@ -66,7 +66,7 @@
 .tp b{display:block;font-size:11.5px;font-weight:700;opacity:.8;margin-bottom:2px}
 
 /* navigasi bawah */
-#nv{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:10px 0 calc(0px + var(--safe-b));min-height:66px}
+#nv{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:10px 0 calc(0px + var(--safe-b));min-height:66px}
 #nv button{border:0;background:none;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;font-size:12px;line-height:16px;font-weight:700;min-height:52px;padding:0}
 #nv [aria-current]{color:#0E7C86}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #nv{background:rgba(9,27,33,.94)}:root:not([data-theme="light"]) #nv [aria-current]{color:var(--pri)}}

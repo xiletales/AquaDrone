@@ -203,9 +203,11 @@
 .pk-big{font:600 32px/38px var(--f-num)}
 .pk-msg{font-size:14px;line-height:20px;font-weight:600}
 .pk-time{font-size:12px;color:var(--mu)}
-.pk-pend{align-self:flex-start;margin-top:6px;height:auto;width:auto;padding:6px 12px;background:var(--fld)}
+.pk-pend{align-self:flex-start;margin:6px 0 0;height:auto;width:auto;padding:6px 12px;background:var(--fld);color:var(--ink)}
 .pk-err{color:var(--c2t);font-size:12px}
 .pk-btns{margin-top:2px}
 .bp:disabled,.bo:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
 .sht-p{margin:0 0 14px;font-size:14px;line-height:20px}
 .sht-btns{gap:10px}
+#pk-body{display:flex;flex-direction:column;gap:12px}
+#air-body{display:flex;flex-direction:column;gap:12px}

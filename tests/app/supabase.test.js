@@ -198,8 +198,9 @@ describe('mode supabase', () => {
   it('Riwayat: Hari ini (jadwal sesi) & 7 hari (DO terendah per hari) dari database', async () => {
     go('history');
     await waitFor(() => G.hist.today && G.hist.week, 'riwayat dimuat');
-    expect(G.hist.today.slice(0, 4).map((r) => r.label)).toEqual(['05.30', '09.30', '13.30', '17.30']);
-    expect(G.hist.today[0]).toMatchObject({ do: 3.6, st: 1, text: 'DO 3,6 · porsi 50%' });
+    // label = jadwal sesi (bukan jam ukur). Hasil yang dibuat tes lain hari ini ikut tampil, jadi cek keberadaan data seed (tidak bergantung jam).
+    expect(G.hist.today.map((r) => r.label)).toEqual(expect.arrayContaining(['05.30', '09.30', '13.30', '17.30']));
+    expect(G.hist.today.find((r) => r.label === '05.30')).toMatchObject({ do: 3.6, st: 1, text: 'DO 3,6 · porsi 50%' });
     expect(text('.hlist')).toContain('DO 3,6 · porsi 50%');
     expect(document.querySelector('.demo-note')).toBeNull();
     click('[data-tab="1"]');

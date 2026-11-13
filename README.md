@@ -58,6 +58,22 @@ export DEVICE_KEY=adk_…  FUNCTIONS_URL=https://<ref>.supabase.co/functions/v1
 npm run device:sim -- aman      # aman | waspada | kritis | lost | wait | feed   (opsi: --speed 20)
 ```
 
+## Monitoring air & Kontrol pakan (ESP32-CAM)
+
+Dua tab baru ("Air" dan "Pakan") membaca/menulis tabel `monitoring_air` dan `kontrol_pakan` di Supabase, yang diisi/dibaca perangkat ESP32-CAM.
+
+* **Monitoring air**: kartu status AMAN/AWAS/BAHAYA dari **rata-rata 10 pembacaan terbaru** (`src/logic/statusAir.js`, ambang di satu konstanta `THRESHOLDS`),
+  nilai terbaru suhu/pH/DO, grafik kecil 30 pembacaan, peringatan "data lama" (> 1 menit), keadaan kosong dan galat jaringan.
+* **Kontrol pakan**: tombol Buka 50% / Buka 100% (dengan konfirmasi) / Tutup. Perintah = `UPDATE kontrol_pakan WHERE id = 1` dengan `perintah_persen` **dan**
+  `nomor_perintah` baru (selalu naik). Aplikasi menunggu jawaban ESP32 (maks. 10 dtk) dan menampilkan kolom `hasil` apa adanya; keputusan akhir tetap di ESP32.
+* Memakai **klien anon tanpa login** (`src/data/airClient.js`) karena policy kedua tabel hanya untuk role `anon`. Fitur ini tidak butuh layar Masuk.
+* Pembaruan: Realtime + polling cadangan 5 dtk (2 dtk saat menunggu jawaban pakan). Selama tabel belum masuk publikasi Realtime, polling yang bekerja. Untuk Realtime penuh, jalankan sekali di SQL Editor:
+  ```sql
+  alter publication supabase_realtime add table public.monitoring_air, public.kontrol_pakan;
+  ```
+* Mengetes tanpa perangkat: tambah baris di Table Editor `monitoring_air` (`suhu`, `ph`, `do_mgl`; `suhu` boleh kosong). Contoh: pH 8,0 / suhu 30 / DO 5 = AMAN; pH 7,2 = AWAS; suhu kosong atau DO 2 = BAHAYA.
+  **Hati-hati:** menekan tombol di aplikasi menulis ke tabel nyata dan dapat menggerakkan perangkat sungguhan.
+
 ## Tes
 
 ```bash
@@ -68,7 +84,7 @@ npm test            # = test:db + test:device + test:app
 |---|---|
 | `npm run test:db` | Migrasi + seed di Postgres WASM (PGlite): RLS, hak akses, klasifikasi, porsi, status, notifikasi, watchdog |
 | `npm run test:device` | Handler Edge Function asli + `simulate-device.ts` asli: 401/405/413/422, lima skenario, pakan |
-| `npm run test:app` | `repo.supabase.js` + layar (jsdom) dengan klien Supabase tiruan: alur lengkap, Realtime, pemulihan sesi, Pengaturan, Riwayat |
+| `npm run test:app` | `repo.supabase.js` + layar (jsdom) dengan klien Supabase tiruan: alur lengkap, Realtime, pemulihan sesi, Pengaturan, Riwayat; plus Monitoring air (38 uji batas status) dan Kontrol pakan (replika skema + RLS `anon`) |
 
 Semua tes berjalan lokal tanpa Supabase. Lihat **[docs/VERIFIKASI.md](docs/VERIFIKASI.md)** untuk status checklist dan hal yang belum bisa diuji tanpa proyek asli.
 
