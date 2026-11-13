@@ -20,6 +20,17 @@ export const openSheet = (title, rows) => {
 };
 export const closeSheet = () => { $('sht').hidden = true; };
 
+let confirmCb = null;
+/** Dialog konfirmasi (bottom sheet). Fokus awal di "Batal" agar tidak terkonfirmasi tanpa sengaja. */
+export const openConfirm = ({ title, text, yes, onYes }) => {
+  confirmCb = onYes;
+  $('sht').innerHTML = `<div class="cd" role="alertdialog" aria-modal="true" aria-label="${title}"><h2 class="sht-t">${title}</h2><p class="sht-p">${text}</p>
+<div class="g2 sht-btns"><button class="bo" data-act="close-sheet">Batal</button><button class="bp" data-act="confirm-yes">${yes}</button></div></div>`;
+  $('sht').hidden = false;
+  $('sht').querySelector('.bo').focus();
+};
+export const runConfirm = () => { const cb = confirmCb; confirmCb = null; closeSheet(); cb?.(); };
+
 /** Header layar dalam: tombol kembali + judul + subjudul + elemen kanan opsional. */
 export const innerHeader = (title, sub, right = '', back = 'home', act = '') =>
   `<div class="hb"><button class="ib" ${act ? `data-act="${act}"` : `data-go="${back}"`} aria-label="Kembali">${icon('back')}</button><div class="ht"><b role="heading" aria-level="1">${title}</b><small>${sub}</small></div>${right}</div>`;
@@ -28,7 +39,7 @@ export const innerHeader = (title, sub, right = '', back = 'home', act = '') =>
 export const homeHeader = (unread = true) =>
   `<div class="hd"><span class="lg"><img src="/logo.png" alt="Logo AQUA-DRONE"></span><div class="hx"><small>Tambak udang vaname</small><h1>${G.pond.name}</h1></div><button class="ib" data-go="lock" aria-label="Notifikasi">${icon('bell')}${unread ? '<i class="dot"></i>' : ''}</button></div>`;
 
-const TABS = [['home', 'Beranda', 'home'], ['history', 'Riwayat', 'clock'], ['settings', 'Pengaturan', 'set']];
+const TABS = [['home', 'Beranda', 'home'], ['air', 'Air', 'drop'], ['pakan', 'Pakan', 'feed'], ['history', 'Riwayat', 'clock'], ['settings', 'Pengaturan', 'set']];
 export const renderNav = (active) => {
   const nv = $('nv');
   nv.hidden = !active;

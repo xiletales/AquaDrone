@@ -8,3 +8,5 @@ import './history.js';
 import './settings.js';
 import './lock.js';
 import './login.js';
+import './air.js';
+import './pakan.js';

@@ -14,6 +14,7 @@ export const IC = {
   therm: 'M10 14V5a2 2 0 014 0v9a4 4 0 11-4 0z',
   wave: 'M4 9h16M4 15h16',
   x: 'M6 6l12 12M18 6L6 18',
+  feed: 'M4 5h16l-5 7v6l-6 2v-8z',
 };
 export const icon = (name, size = 22) =>
   `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${IC[name]}"/></svg>`;

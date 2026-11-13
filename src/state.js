@@ -73,6 +73,17 @@ export const MOCK = import.meta.env?.VITE_DATA_SOURCE !== 'supabase';
 const TZ = 'Asia/Jakarta';
 const fmtTime = new Intl.DateTimeFormat('id-ID', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false });
 const fmtDate = new Intl.DateTimeFormat('id-ID', { timeZone: TZ, weekday: 'long', day: 'numeric', month: 'long' });
+/** "14.05.12" (WIB, dengan detik). */
+export const hhmmss = (d) => new Intl.DateTimeFormat('id-ID', { timeZone: TZ, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(d instanceof Date ? d : new Date(d)).replace(/:/g, '.');
+/** "5 detik lalu", "2 menit lalu", "3 jam lalu". */
+export const ago = (iso, now = Date.now()) => {
+  const s = Math.max(0, Math.floor((now - new Date(iso).getTime()) / 1000));
+  if (s < 5) return 'baru saja';
+  if (s < 60) return `${s} detik lalu`;
+  if (s < 3600) return `${Math.floor(s / 60)} menit lalu`;
+  if (s < 86400) return `${Math.floor(s / 3600)} jam lalu`;
+  return `${Math.floor(s / 86400)} hari lalu`;
+};
 /** "05.41" (WIB). */
 export const hhmm = (d) => fmtTime.format(d instanceof Date ? d : new Date(d)).replace(':', '.');
 /** "Sabtu, 24 Oktober". */
@@ -105,6 +116,7 @@ export const getShown = () => (MOCK ? mockResult(G.cur === 'kritis' ? 'kritis' :
 export const measuredAt = (r) => (r.at ? hhmm(r.at) : '05.41');
 /** Indeks tema latar (0 aman, 1 waspada, 2 kritis). */
 export const themeIdx = () => {
+  if (G.scr === 'air' || G.scr === 'pakan') return G.airSt ?? 0;   // tema mengikuti status air (AMAN/AWAS/BAHAYA)
   if (MOCK) return ST[G.cur].st;
   const r = G.scr === 'result' ? G.shown : G.latest;
   return r ? r.st : 0;

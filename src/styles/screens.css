@@ -180,3 +180,32 @@
 .hn{font-weight:600}
 
 #ph.lk #scr{padding-bottom:calc(38px + var(--safe-b))}
+
+/* ===== Monitoring air & Kontrol pakan ===== */
+.nav5{}
+#nv button{padding:0 2px;min-width:0}
+@media(max-width:340px){#nv button{font-size:11px}}
+.h-air{padding:14px;min-height:150px}
+.h-air h2{margin:8px 0 0;font:600 26px/30px var(--f-num)}
+.h-air p{margin:4px 0 0;font-size:13px;line-height:18px;font-weight:500}
+.air-avg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 0}
+.air-avg small{display:block;font-size:12px;line-height:16px;opacity:.85}.air-avg b{font:600 16px/20px var(--f-num)}
+.h-air .cap{display:block;margin-top:8px;font-size:12px;line-height:16px;opacity:.9}
+.sb.warn{background:var(--c1b);color:var(--c1t);height:auto;padding:10px 14px;font-size:13px;line-height:18px}
+.air-empty{text-align:center;padding:24px 16px}.air-empty p{margin:0 0 12px}
+.air-note{margin-top:2px;text-align:center;font-size:12px}
+.trend h3{margin:0 0 6px}
+.tr-row{display:grid;grid-template-columns:64px 1fr 44px;align-items:center;gap:8px;padding:4px 0;font-size:13px;color:var(--ink)}
+.tr-row small{color:var(--mu);font-size:11px}.tr-row b{text-align:right;font:600 14px var(--f-num)}
+.spark{width:100%;height:28px;display:block}.spark polyline{fill:none;stroke:var(--pri);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.pk-state{padding:16px;display:flex;flex-direction:column;gap:4px}
+.pk-state>small{color:var(--mu);font-size:12px}
+.pk-big{font:600 32px/38px var(--f-num)}
+.pk-msg{font-size:14px;line-height:20px;font-weight:600}
+.pk-time{font-size:12px;color:var(--mu)}
+.pk-pend{align-self:flex-start;margin-top:6px;height:auto;width:auto;padding:6px 12px;background:var(--fld)}
+.pk-err{color:var(--c2t);font-size:12px}
+.pk-btns{margin-top:2px}
+.bp:disabled,.bo:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+.sht-p{margin:0 0 14px;font-size:14px;line-height:20px}
+.sht-btns{gap:10px}

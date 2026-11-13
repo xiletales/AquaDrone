@@ -33,7 +33,7 @@ export function draw(keepScroll = false) {
   hooks.forEach((h) => h());
 }
 
-const TITLES = { home: 'Beranda', measure: 'Pengukuran', wait: 'Menunggu drone', lost: 'Data terputus', result: 'Hasil pengukuran', feed: 'Penebaran pakan', history: 'Riwayat', settings: 'Pengaturan', lock: 'Layar kunci', login: 'Masuk' };
+const TITLES = { air: 'Monitoring air', pakan: 'Kontrol pakan', home: 'Beranda', measure: 'Pengukuran', wait: 'Menunggu drone', lost: 'Data terputus', result: 'Hasil pengukuran', feed: 'Penebaran pakan', history: 'Riwayat', settings: 'Pengaturan', lock: 'Layar kunci', login: 'Masuk' };
 const THEME = ['#0d6672', '#86520a', '#8f2a28'];
 function syncMeta(def) {
   document.title = `AQUA-DRONE · ${TITLES[G.scr] || ''}`;

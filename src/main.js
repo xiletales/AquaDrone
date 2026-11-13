@@ -6,6 +6,7 @@ import './styles/screens.css';
 import { $, G, TIPS } from './state.js';
 import { initScene } from './background/scene.js';
 import { spriteHTML, shrimp } from './components/shrimp.js';
+import { runConfirm } from './components/ui.js';
 import { initRouter, onAction, go } from './router.js';
 import { loadRepo, repo } from './data/repo.js';
 import './screens/index.js';
@@ -22,6 +23,7 @@ onAction('tip', () => {
   document.querySelectorAll('.tp .tt').forEach((x) => { x.textContent = TIPS[G.tip % TIPS.length]; });
 });
 onAction('close-sheet', () => { $('sht').hidden = true; });
+onAction('confirm-yes', () => runConfirm());
 
 // Loader awal (±3,7 dtk, bisa diketuk untuk lewati)
 $('ld').innerHTML = `<div class="lo"><i></i><i></i><img src="/logo.png" alt="Logo AQUA-DRONE"></div>
